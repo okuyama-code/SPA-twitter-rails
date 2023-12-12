@@ -51,6 +51,8 @@ DeviseTokenAuth.setup do |config|
     :'token-type' => 'token-type'
   }
 
+  config.change_headers_on_each_request = false
+
   # Makes it possible to use custom uid column
   # config.other_uid = "foo"
 
