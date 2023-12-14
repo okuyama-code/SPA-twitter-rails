@@ -1,4 +1,4 @@
-class Auth::SessionsController < ApplicationController
+class Api::V1::SignInController < ApplicationController
   def index
     if current_user
       # render json: current_user
