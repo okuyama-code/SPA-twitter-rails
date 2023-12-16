@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
 
   has_one_attached :icon
   has_one_attached :header
+
+  validates :name, presence: true
+  validates :email, presence: true
+
 end
