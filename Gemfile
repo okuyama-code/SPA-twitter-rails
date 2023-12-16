@@ -59,4 +59,6 @@ end
 gem 'kaminari'
 gem 'devise'
 gem 'devise_token_auth'
+gem 'devise-i18n'
+gem 'rails-i18n'
 
