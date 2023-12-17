@@ -1,5 +1,6 @@
 ## TODO
-seedファイルでimageをattachしてブラウザに表示させる
+- seedファイルでimageをattachしてブラウザに表示させる
+- imageをアップロードするエンドポイントを調べる
 
 ## よく使うコマンド
 
@@ -7,3 +8,5 @@ seedファイルでimageをattachしてブラウザに表示させる
 sudo chmod -R 777 /home/okuyama/spa-twitter-rails/
 ```
 
+# ブランチ
+signup  tweets

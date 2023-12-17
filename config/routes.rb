@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :sign_in, only: %i[index]
+      resources :tweets, only: %i[index  show  create destroy]
     end
   end
 
