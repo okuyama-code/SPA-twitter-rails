@@ -12,17 +12,20 @@ class Api::V1::TweetsController < ApplicationController
   end
 
   def create
-    post = current_user.tweets.build(post_params)
-    if post.save
-      render json: { post: post }, status: :ok
+    pp "デバック！！！！！！！！！！！！！"
+    pp params
+    tweet = Tweet.new(tweet_params)
+
+    if tweet.save!
+      render json: { tweet: tweet }, status: :ok
     else
-      render json: { error_message: post.errors.full_messages}, status: :bad
+      render json: { error_message: tweet.errors.full_messages }, status: :bad
     end
   end
 
   private
-  def post_params
-    params.require(:tweet).permit(:tweet_content, :image)
+  def tweet_params
+    params.require(:tweet).permit(:tweet_content, :user_id, :image)
   end
 
 end
