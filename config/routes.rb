@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :sign_in, only: %i[index]
       resources :tweets, only: %i[index  show  create destroy]
+      post 'images', to: 'tweets#create_images'
     end
   end
 
