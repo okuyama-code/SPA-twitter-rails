@@ -29,13 +29,13 @@ class Api::V1::TweetsController < ApplicationController
 
     if tweet.valid?
        # imageが送信された場合。以下の部分で画像データを保存し、tweetのデータに添付する
-      if params[:tweet][:image]
-        blob =  ActiveStorage::Blob.create_after_upload!(
-          io: StringIO.new(decode(params[:tweet][:image][:data]) + "\n"),
-          filename: params[:tweet][:image][:filename]
+      if params[:image][:name] != ""
+        blob =  ActiveStorage::Blob.create_and_upload!(
+          io: StringIO.new(decode(params[:image][:data]) + "\n"),
+          filename: params[:image][:name]
         )
-        pp "デバック！！！！！！！！！！！！！"
-        pp blob
+        # pp "デバック！！！！！！！！！！！！！"
+        # pp blob
         tweet.image.attach(blob)
       end
     end
