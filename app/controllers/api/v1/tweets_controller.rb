@@ -1,9 +1,10 @@
 class Api::V1::TweetsController < ApplicationController
   def index
-    # orderがないとエラーになる
+    # orderがあるとエラーになる
     # tweets = Tweet.all.order(create_at: :desc)
     tweets = Tweet.all
-    render json: { tweets: tweets}
+    users = User.all
+    render json: { tweets: tweets, users: users}, status: 200
   end
 
   def show
@@ -34,8 +35,6 @@ class Api::V1::TweetsController < ApplicationController
           io: StringIO.new(decode(params[:image][:data]) + "\n"),
           filename: params[:image][:name]
         )
-        # pp "デバック！！！！！！！！！！！！！"
-        # pp blob
         tweet.image.attach(blob)
       end
     end
