@@ -1,4 +1,6 @@
 class Api::V1::TweetsController < ApplicationController
+  before_action :set_tweet, only: %i[show destroy]
+
   #  http://localhost:3000/api/v1/tweets でデータ見れる
   def index
     @tweets = Tweet.all.order(created_at: :desc)
@@ -15,9 +17,13 @@ class Api::V1::TweetsController < ApplicationController
 
   end
 
+  # http://localhost:3000/api/v1/tweets/50
   def show
-    tweet = Tweet.find_by(id: params[:id])
-    render json: { tweet: tweet }
+    if @tweet.image.attached?
+      render json: @tweet.as_json.merge(image_url: url_for(@tweet.image))
+    else
+      render json: @tweet.as_json.merge(image_url: nil)
+    end
   end
 
   # Reactからcurrent_user.idを送るパターン
@@ -65,6 +71,10 @@ class Api::V1::TweetsController < ApplicationController
 
   def decode(string)
     Base64.decode64(string.split(',').last)
+  end
+
+  def set_tweet
+    @tweet = Tweet.find(params[:id])
   end
 
 end
