@@ -40,19 +40,6 @@ class Api::V1::TweetsController < ApplicationController
   # current_userを使う方
   def create
     tweet = current_user.tweets.build(tweet_params)
-    # 画像投稿できるようにする記述
-
-    if tweet.valid?
-       # imageが送信された場合。以下の部分で画像データを保存し、tweetのデータに添付する
-      if params[:image][:name] != ""
-        blob =  ActiveStorage::Blob.create_and_upload!(
-          io: StringIO.new(decode(params[:image][:data]) + "\n"),
-          filename: params[:image][:name]
-        )
-        tweet.image.attach(blob)
-      end
-    end
-
     if tweet.save!
       render json: { tweet: tweet }, status: :ok
     else
@@ -60,16 +47,29 @@ class Api::V1::TweetsController < ApplicationController
     end
   end
 
-  def create_images
-    # createの処理を分ける。2段階にしなきゃいけない。
-    # 1段階目が画像以外の情報を入れてしまう。(理由は軽いから。軽めの処理は先にやる)。画像投稿しないときに一段階目だけで完了する。(/api/v1/tweets)
-    # 2段階目画像の情報を登録する。create_imagesを画像投稿のみにする。画像がテンプされているか、されてないかの分岐入る(/api/v1/images)
-    # 投稿ボタンでAPIを２つ叩いている。１，２の順番でたたいている。ツイートレコードを先に作成して画像をアタッチしている。
+  def attach_images
+    # 直前に作成されたレコードにattachする形で進める。
+    # imageが送信された場合。以下の部分で画像データを保存し、tweetのデータに添付する
+    if params[:image][:name] != ""
+      pp "デバック！！！！！！！！！！！！！"
+      pp params
+      blob =  ActiveStorage::Blob.create_and_upload!(
+        io: StringIO.new(decode(params[:image][:data]) + "\n"),
+        filename: params[:image][:name]
+      )
+      tweet = Tweet.last
+      tweet.image.attach(blob)
+
+      # if tweet.image.attached?
+      #   render json: { tweet: tweet }, status: :ok
+      # else
+    end
   end
 
   private
   def tweet_params
-    params.require(:tweet).permit(:tweet_content, :user_id, :image)
+    # params.require(:tweet).permit(:tweet_content, :user_id, :image)
+    params.require(:tweet).permit(:tweet_content)
   end
 
   def decode(string)
