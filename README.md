@@ -1,8 +1,5 @@
 ## TODO
-
-- まずimageを投稿できるか動作確認する
-  https://qiita.com/morieeeenyo/items/8253315a4d464521b90a
-- seedファイルでimageをattachしてブラウザに表示させる
+ページネーションはポケモン図鑑を見るべき。
 
 
 ## よく使うコマンド

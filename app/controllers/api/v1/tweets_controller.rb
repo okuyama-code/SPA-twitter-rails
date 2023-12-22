@@ -61,7 +61,10 @@ class Api::V1::TweetsController < ApplicationController
   end
 
   def create_images
-
+    # createの処理を分ける。2段階にしなきゃいけない。
+    # 1段階目が画像以外の情報を入れてしまう。(理由は軽いから。軽めの処理は先にやる)。画像投稿しないときに一段階目だけで完了する。(/api/v1/tweets)
+    # 2段階目画像の情報を登録する。create_imagesを画像投稿のみにする。画像がテンプされているか、されてないかの分岐入る(/api/v1/images)
+    # 投稿ボタンでAPIを２つ叩いている。１，２の順番でたたいている。ツイートレコードを先に作成して画像をアタッチしている。
   end
 
   private
