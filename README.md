@@ -8,6 +8,6 @@
 sudo chmod -R 777 /home/okuyama/spa-twitter-rails/
 ```
 
-# ブランチ
-現在のブランチ　tweets
+# ブランチ tweetSub 画像投稿とエンドポイントを分けるためのブランチ
+現在のブランチ　
 signup  tweets
