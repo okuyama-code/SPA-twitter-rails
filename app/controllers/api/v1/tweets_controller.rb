@@ -1,15 +1,18 @@
 class Api::V1::TweetsController < ApplicationController
+  #  http://localhost:3000/api/v1/tweets でデータ見れる
   def index
-    # http://localhost:3000/api/v1/tweets でデータ見れる
-    # orderがあるとエラーになる
-    # tweets = Tweet.all.order(create_at: :desc)
-    tweets = Tweet.all
+    @tweets = Tweet.all.order(created_at: :desc)
     users = User.all
-    @tweet = Tweet.last
-    # @tweet = Tweet.last.to_json(include: [:image])
-    image_path = Rails.application.routes.url_helpers.rails_representation_url(@tweet.image.variant({}), only_path: true)
 
-    render json: { tweets: tweets, users: users, image: image_path }, status: 200
+    tweets_with_images = @tweets.map do |tweet|
+      if tweet.image.attached?
+        tweet.as_json.merge(image_url: url_for(tweet.image))
+      else
+        tweet.as_json.merge(image_url: nil)
+      end
+    end
+    render json: { tweets: tweets_with_images, users: users }, status: 200
+
   end
 
   def show
