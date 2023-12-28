@@ -5,23 +5,44 @@ class Api::V1::TweetsController < ApplicationController
   include Pagination
 
   #  http://localhost:3000/api/v1/tweets でデータ見れる
+  # def index
+  #   @tweets = Tweet.all.order(created_at: :desc)
+  #   # pageメソッドはページ番号、perメソッドは1ページあたりの表示数を指定。
+  #   tweets_per_page = 2
+  #   # @tweets = Tweet.page(page_number).per(per_page).order(created_at: :desc)
+  #   users = User.all
+
+  #   tweet_with_images = paginate_tweets(@tweets, tweets_per_page)
+
+  #   total_tweets_count = Tweet.count
+
+  #   # Num of pages = ceil(total_posts_count / posts_per_page) => ceil(25 / 24) = ceil(1.04) = 2
+  #   render json: {
+  #     tweets: tweet_with_images,
+  #     total_count: total_tweets_count,
+  #     per_page: tweets_per_page,
+  #     users: users }
+
+  # end
+
   def index
-    @tweets = Tweet.all.order(created_at: :desc)
-    # pageメソッドはページ番号、perメソッドは1ページあたりの表示数を指定。
-    tweets_per_page = 2
-    # @tweets = Tweet.page(page_number).per(per_page).order(created_at: :desc)
     users = User.all
+    @tweets = Tweet.page(params[:page]).per(params[:per])
+    # @tweets = Tweet.all
+    # tweets_with_images = @tweets.map do |tweet|
+    #   if tweet.image.attached?
+    #     tweet.as_json.merge(image_url: url_for(tweet.image))
+    #   else
+    #     tweet.as_json.merge(image_url: nil)
+    #   end
+    # end
 
-    tweet_with_images = paginate_tweets(@tweets, tweets_per_page)
-
-    total_tweets_count = Tweet.count
-
-    # Num of pages = ceil(total_posts_count / posts_per_page) => ceil(25 / 24) = ceil(1.04) = 2
+    @pagination = pagination(@tweets)
     render json: {
-      tweets: tweet_with_images,
-      total_count: total_tweets_count,
-      per_page: tweets_per_page,
-      users: users }
+      tweets: @tweets,
+      pagenation: @pagination,
+      users: users
+    }
 
   end
 
@@ -87,5 +108,7 @@ class Api::V1::TweetsController < ApplicationController
   def set_tweet
     @tweet = Tweet.find(params[:id])
   end
+
+
 
 end
