@@ -1,9 +1,9 @@
-class Api::V1::TweetsController < ApplicationController
-  before_action :set_tweet, only: %i[show destroy]
+class Api::V1::PostsController < ApplicationController
+  before_action :set_post, only: %i[show destroy]
 
 
 
-  #  http://localhost:3000/api/v1/tweets でデータ見れる
+  #  http://localhost:3000/api/v1/posts でデータ見れる
   def index
     users = User.all
     @posts = Post.order(created_at: :desc)
@@ -16,25 +16,24 @@ class Api::V1::TweetsController < ApplicationController
       end
     end
 
-    render json: { posts_with_images }
+    render json: { posts: posts_with_images, users: users }
   end
 
-  # http://localhost:3000/api/v1/tweets/50
+  # http://localhost:3000/api/v1/posts/50
   def show
-    if @tweet.image.attached?
-      render json: @tweet.as_json.merge(image_url: url_for(@tweet.image))
+    if @post.image.attached?
+      render json: @post.as_json.merge(image_url: url_for(@post.image))
     else
-      render json: @tweet.as_json.merge(image_url: nil)
+      render json: @post.as_json.merge(image_url: nil)
     end
   end
 
-
   def create
-    tweet = current_user.tweets.build(tweet_params)
-    if tweet.save!
-      render json: { tweet: tweet }, status: :ok
+    post = current_user.posts.build(post_params)
+    if post.save!
+      render json: { post: post }, status: :ok
     else
-      render json: { error_message: tweet.errors.full_messages }, status: 422
+      render json: { error_message: post.errors.full_messages }, status: 422
     end
   end
 
@@ -48,29 +47,27 @@ class Api::V1::TweetsController < ApplicationController
         io: StringIO.new(decode(params[:image][:data]) + "\n"),
         filename: params[:image][:name]
       )
-      tweet = Tweet.last
-      tweet.image.attach(blob)
+      post = Post.last
+      post.image.attach(blob)
 
-      # if tweet.image.attached?
-      #   render json: { tweet: tweet }, status: :ok
+      # if post.image.attached?
+      #   render json: { post: post }, status: :ok
       # else
     end
   end
 
   private
-  def tweet_params
-    # params.require(:tweet).permit(:tweet_content, :user_id, :image)
-    params.require(:tweet).permit(:tweet_content)
+  def post_params
+    params.require(:post).permit(:post_content)
   end
 
   def decode(string)
     Base64.decode64(string.split(',').last)
   end
 
-  def set_tweet
-    @tweet = Tweet.find(params[:id])
+  def set_post
+    @post = Post.find(params[:id])
   end
-
 
 
 end

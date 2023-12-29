@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :sign_in, only: %i[index]
-      resources :tweets, only: %i[index  show  create destroy]
-      post 'images', to: 'tweets#attach_images'
+      resources :posts, only: %i[index  show  create destroy]
+      post 'images', to: 'posts#attach_images'
     end
   end
 

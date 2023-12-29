@@ -8,25 +8,16 @@ class ApplicationController < ActionController::Base
 	private
 
 	# augment 増強する　付け足す
-	def augment_with_image(tweet)
-		if tweet.image.attached?
-			tweet.as_json.merge(image_url: url_for(tweet.image))
-		else
-			tweet.as_json.merge(image_url: nil)
-		end
+	def augment_with_image(post)
+    if post.image.attached?
+      post.as_json.merge(image_url: url_for(post.image))
+    else
+      post.as_json.merge(image_url: nil)
+    end
+  end
 
-	end
-
-	def paginate_tweets(tweets, tweets_per_page)
-		paginated_tweets = tweets.page(params[:page]).per(tweets_per_page)
-		paginated_tweets.map { |tweet| augment_with_image(tweet) }
-	end
+  def paginate_posts(posts, posts_per_page)
+    paginated_posts = posts.page(params[:page]).per(posts_per_page)
+    paginated_posts.map { |post| augment_with_image(post) }
+  end
 end
-
-# tweets_with_images = @tweets.map do |tweet|
-# 	if tweet.image.attached?
-# 		tweet.as_json.merge(image_url: url_for(tweet.image))
-# 	else
-# 		tweet.as_json.merge(image_url: nil)
-# 	end
-# end

@@ -47,6 +47,8 @@ group :development, :test do
   gem 'rubocop-hc', require: false, github: 'ihatov08/rubocop-hc'
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  gem 'faker'
+  gem 'gimei'
 end
 
 group :development do
