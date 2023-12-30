@@ -3,7 +3,6 @@ class Api::V1::PostsController < ApplicationController
 
   #  http://localhost:3000/api/v1/posts でデータ見れる
   def index
-    @users = User.all
     @posts = Post.order(created_at: :desc)
 
     posts_with_images = @posts.map do |post|
@@ -14,7 +13,7 @@ class Api::V1::PostsController < ApplicationController
       end
     end
 
-    render json: { posts: posts_with_images, users: @users }
+    render json: { posts: posts_with_images }
   end
 
   # http://localhost:3000/api/v1/posts/50
@@ -48,6 +47,12 @@ class Api::V1::PostsController < ApplicationController
       post = Post.last
       post.image.attach(blob)
     end
+  end
+
+  # http://localhost:3000/api/v1/user_all
+  def get_users
+    @users = User.all
+    render json: { users: @users }
   end
 
   private
