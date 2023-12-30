@@ -1,11 +1,9 @@
 class Api::V1::PostsController < ApplicationController
   before_action :set_post, only: %i[show destroy]
 
-
-
   #  http://localhost:3000/api/v1/posts でデータ見れる
   def index
-    users = User.all
+    @users = User.all
     @posts = Post.order(created_at: :desc)
 
     posts_with_images = @posts.map do |post|
@@ -16,7 +14,7 @@ class Api::V1::PostsController < ApplicationController
       end
     end
 
-    render json: { posts: posts_with_images, users: users }
+    render json: { posts: posts_with_images, users: @users }
   end
 
   # http://localhost:3000/api/v1/posts/50
@@ -49,10 +47,6 @@ class Api::V1::PostsController < ApplicationController
       )
       post = Post.last
       post.image.attach(blob)
-
-      # if post.image.attached?
-      #   render json: { post: post }, status: :ok
-      # else
     end
   end
 

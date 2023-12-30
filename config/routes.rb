@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :sign_in, only: %i[index]
       resources :posts, only: %i[index  show  create destroy]
       post 'images', to: 'posts#attach_images'
+      get 'search/posts', to: 'search#index'
     end
   end
 
