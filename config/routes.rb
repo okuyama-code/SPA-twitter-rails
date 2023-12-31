@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       resources :posts, only: %i[index  show  create destroy]
       post 'images', to: 'posts#attach_images'
       get 'user_all', to: 'posts#get_users'
-      get 'search/posts', to: 'search#index'
+      resources :search, only: [:index]
     end
   end
 
