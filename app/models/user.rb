@@ -16,4 +16,12 @@ class User < ActiveRecord::Base
   has_many :tweets, dependent: :destroy
   has_many :posts, dependent: :destroy
 
+  before_create :attach_default_image
+
+  def attach_default_image
+    icon.attach(io: File.open(Rails.root.join('app/assets/images/icon.png')), filename: 'icon.png')
+    header.attach(io: File.open(Rails.root.join('app/assets/images/header.png')), filename: 'header.png')
+  end
+
+
 end

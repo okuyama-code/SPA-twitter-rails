@@ -1,14 +1,15 @@
-Post.destroy_all
-
-
 # ================== User create =======================
+# okuyama
 okuyama = User.create!(name: "okuyama | HC", username: "output0121", email: "ooyy0121@gmail.com", password: "484848")
 
+# sato
 sato = User.create!(name: "sato | HD", username: "sato02", email: "sato@example.com", password: "484848")
 
+# yamada
 yamada = User.create!(name: "yamada", username: "yamada03", email: "yamada@example.com", password: "484848")
-suzuki = User.create!(name: "suzuki", username: "suzuki04", email: "suzuki@example.com", password: "484848")
 
+# suzuki
+suzuki = User.create!(name: "suzuki", username: "suzuki04", email: "suzuki@example.com", password: "484848")
 
 # ========== tweet 作成 ===============
 
