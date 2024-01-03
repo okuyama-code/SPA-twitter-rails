@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       post 'images', to: 'posts#attach_images'
       resources :search, only: [:index]
       resources :users, only: %i[index show update destroy]
+      resources :profile, only: [:update]
     end
   end
 
