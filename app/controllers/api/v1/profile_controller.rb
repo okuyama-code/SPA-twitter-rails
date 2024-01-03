@@ -12,7 +12,6 @@ class Api::V1::ProfileController < ApplicationController
   private
 
   def profile_params
-    # TODO usernameを消すかどうか、画像が通るかどうか
-    params.require(:user).permit(:name, :email, :date_of_birth, :self_introduction, :location, :website, :username, :icon, :header)
+    params.require(:user).permit(:name, :date_of_birth, :self_introduction, :location, :website, :icon, :header)
   end
 end
