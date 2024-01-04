@@ -49,6 +49,9 @@ class Api::V1::PostsController < ApplicationController
     @post.destroy
   end
 
+  def post_comment
+  end
+
   private
   def post_params
     params.require(:post).permit(:post_content)

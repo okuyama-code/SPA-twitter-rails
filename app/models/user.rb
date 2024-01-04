@@ -13,8 +13,9 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true
 
-  has_many :tweets, dependent: :destroy
   has_many :posts, dependent: :destroy
+  has_many :comments # User.commentsで、ユーザーの所有するコメントを取得できる。
+
 
   before_create :attach_default_image
 

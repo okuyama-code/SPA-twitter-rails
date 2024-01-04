@@ -8,11 +8,15 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :sign_in, only: %i[index]
-      resources :posts, only: %i[index show create destroy]
+      resources :posts, only: %i[index show create destroy] do
+      resources :comments, only: %i[index], to: 'posts#post_comment', controller: 'posts'
+      end
       post 'images', to: 'posts#attach_images'
-      resources :search, only: [:index]
+      resources :search, only: %i[index]
       resources :users, only: %i[index show update destroy]
-      resources :profile, only: [:update]
+      resources :profile, only: %i[update]
+      resources :comments, only: %i[create destroy]
+
     end
   end
 
