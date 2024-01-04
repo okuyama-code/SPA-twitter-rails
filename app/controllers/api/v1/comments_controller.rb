@@ -2,13 +2,13 @@ class Api::V1::CommentsController < ApplicationController
   def create
     pp "デバック！！！！！！！！！！！！！"
     pp current_user
-    @comment = Comment.build(comment_params)
-    @comment.user = current_user
+    @comment = Comment.new(comment_params)
+    @comment.user_id = current_user.id
 
     if @comment.save
       render json: {comment: @comment}
     else
-      render json : { message: "コメントの作成に失敗しました。"}
+      render json: { message: "コメントの作成に失敗しました。"}
     end
   end
 
