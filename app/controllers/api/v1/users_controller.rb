@@ -12,7 +12,10 @@ class Api::V1::UsersController < ApplicationController
 
   # http://localhost:3000/api/v1/users/1
   def show
-    render json: { user: @user.as_json.merge(icon_url: url_for(@user.icon), header_url: url_for(@user.header)) }
+    user_posts = @user.posts.order(created_at: :desc)
+    user_posts_with_image = user_posts.map { |post| augment_with_image(post) }
+
+    render json: { user: @user.as_json.merge(icon_url: url_for(@user.icon), header_url: url_for(@user.header)), posts: user_posts_with_image }
   end
 
   def destroy
