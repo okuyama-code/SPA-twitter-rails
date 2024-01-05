@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-	include DeviseTokenAuth::Concerns::SetUserByToken
+  include DeviseTokenAuth::Concerns::SetUserByToken
 
-	skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
 
-	private
+  private
 
-	# augment 増強する　付け足す
-	def augment_with_image(post)
+  # augment 増強する　付け足す
+  def augment_with_image(post)
     if post.image.attached?
       post.as_json.merge(image_url: url_for(post.image))
     else

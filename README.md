@@ -7,6 +7,10 @@ comments
 sudo chmod -R 777 /home/okuyama/spa-twitter-rails/
 ```
 
+```
+docker compose run --rm api bundle exec rubocop -A
+```
+
 
 ## コメント機能　create destroy ツイート詳細画面での一覧 プロフィール画面で自分のコメント一覧を表示する(users#showに記載)
 
