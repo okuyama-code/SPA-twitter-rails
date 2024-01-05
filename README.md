@@ -27,3 +27,10 @@ rails
 react
 ツイート一覧画面からいいねボタンを押していいねできるようにする
 いいね数を表示する
+
+## コマンド
+rails g model Repost user:references post:references
+rails g controller reposts create destroy
+
+rails g model Like user:references post:references
+rails g controller likes create destroy
