@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -19,9 +19,7 @@ class User < ActiveRecord::Base
   before_create :attach_default_image
 
   def attach_default_image
-    icon.attach(io: File.open(Rails.root.join('app/assets/images/icon.png')), filename: 'icon.png')
-    header.attach(io: File.open(Rails.root.join('app/assets/images/header.png')), filename: 'header.png')
+    icon.attach(io: Rails.root.join('app/assets/images/icon.png').open, filename: 'icon.png')
+    header.attach(io: Rails.root.join('app/assets/images/header.png').open, filename: 'header.png')
   end
-
-
 end
