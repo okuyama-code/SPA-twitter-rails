@@ -18,9 +18,10 @@ module Api
       def show
         user_posts = @user.posts.order(created_at: :desc)
         user_posts_with_image = user_posts.map { |post| augment_with_image(post) }
+        user_comments = @user.comments.order(created_at: :desc)
 
         render json: { user: @user.as_json.merge(icon_url: url_for(@user.icon), header_url: url_for(@user.header)),
-                       posts: user_posts_with_image }
+                       posts: user_posts_with_image, user_comments: user_comments }
       end
 
       def destroy; end

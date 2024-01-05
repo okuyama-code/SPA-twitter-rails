@@ -14,7 +14,6 @@ module Api
         end
       end
 
-      # 修正必要かも
       def destroy
         @comment = Comment.find(params[:id])
         @comment.destroy
