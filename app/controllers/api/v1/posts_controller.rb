@@ -53,7 +53,13 @@ module Api
         @post.destroy
       end
 
-      def post_comment; end
+      # http://localhost:3000/api/v1/posts/87/comments
+      def post_comment
+        @post = Post.find(params[:post_id])
+        post_comments = @post.comments.order(created_at: :desc)
+
+        render json: { post_comments: post_comments }
+      end
 
       private
 

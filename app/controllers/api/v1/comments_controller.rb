@@ -4,8 +4,6 @@ module Api
   module V1
     class CommentsController < ApplicationController
       def create
-        Rails.logger.debug 'デバック！！！！！！！！！！！！！'
-        Rails.logger.debug current_user
         @comment = Comment.new(comment_params)
         @comment.user_id = current_user.id
 
@@ -26,8 +24,6 @@ module Api
 
       def comment_params
         params.require(:comment).permit(:comment_content, :post_id)
-        # params.require(:comment).permit(:comment_content, :comment_img)
-        # formにてpost_idパラメータを送信して、コメントへpost_idを格納するようにする必要がある。
       end
     end
   end
