@@ -58,7 +58,7 @@ module Api
         @post = Post.find(params[:post_id])
         post_comments = @post.comments.order(created_at: :desc)
 
-        render json: { post_comments: post_comments }
+        render json: { post_comments: }
       end
 
       private
