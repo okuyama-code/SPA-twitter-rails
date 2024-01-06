@@ -33,4 +33,4 @@ rails g model Repost user:references post:references
 rails g controller reposts create destroy
 
 rails g model Like user:references post:references
-rails g controller likes create destroy
+rails g controller Api::V1::likes create destroy

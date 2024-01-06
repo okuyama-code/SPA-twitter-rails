@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :posts, only: %i[index show create destroy] do
         resources :comments, only: %i[index], to: 'posts#post_comment', controller: 'posts'
         resource :repost, only: %i[create destroy]
+        resource :likes, only: %i[create destroy]
       end
       post 'images', to: 'posts#attach_images'
       resources :search, only: %i[index]
