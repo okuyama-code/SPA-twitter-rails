@@ -15,7 +15,10 @@ Rails.application.routes.draw do
       end
       post 'images', to: 'posts#attach_images'
       resources :search, only: %i[index]
-      resources :users, only: %i[index show update destroy]
+      resources :users, only: %i[index show update destroy] do
+        post 'follow', to: 'relationships#create'
+        delete 'unfollow', to: 'relationships#destroy'
+      end
       resources :profile, only: %i[update]
       resources :comments, only: %i[create destroy]
     end
