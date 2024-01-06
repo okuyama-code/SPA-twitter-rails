@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       resources :search, only: %i[index]
       resources :users, only: %i[index show update destroy] do
         post 'follow', to: 'relationships#create'
-        delete 'unfollow', to: 'relationships#destroy'
+        post 'unfollow', to: 'relationships#destroy'
       end
       resources :profile, only: %i[update]
       resources :comments, only: %i[create destroy]
