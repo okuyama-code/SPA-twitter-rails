@@ -11,9 +11,9 @@ class ApplicationController < ActionController::Base
   # TODO 拡張repostカウント　動作確認
   def augment_with_image(post)
     if post.image.attached?
-      post.as_json.merge(image_url: url_for(post.image), post_repost_count: post.reposts.count)
+      post.as_json.merge(image_url: url_for(post.image), post_repost_count: post.reposts.count, post_like_count: post.likes.count)
     else
-      post.as_json.merge(image_url: nil, post_repost_count: post.reposts.count)
+      post.as_json.merge(image_url: nil, post_repost_count: post.reposts.count, post_like_count: post.likes.count)
     end
   end
 
