@@ -5,7 +5,7 @@ module Api
     class LikesController < ApplicationController
       before_action :set_post
 
-
+      #TODO https://github.com/okuyama-code/hc_twitter_clone/blob/notification/app/controllers/likes_controller.rb
       def create
         existing_like = Like.find_by(user_id: params[:id], post_id: @post.id)
 
