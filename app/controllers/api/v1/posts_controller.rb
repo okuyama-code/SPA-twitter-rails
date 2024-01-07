@@ -33,8 +33,6 @@ module Api
         pp "デバック！！！！！！！！！！！！！"
         pp current_user
 
-         
-
         post = current_user.posts.build(post_params)
         if post.save!
           render json: { post: }, status: :ok
