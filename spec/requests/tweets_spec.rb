@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Auth::Registrations' do
+RSpec.describe 'Tweets' do
   describe 'GET /index' do
     pending "add some examples (or delete) #{__FILE__}"
   end
