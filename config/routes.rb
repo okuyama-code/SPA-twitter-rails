@@ -22,6 +22,9 @@ Rails.application.routes.draw do
       resources :profile, only: %i[update]
       resources :comments, only: %i[create destroy]
       resources :notifications, only: %i[index]
+      resources :groups, only: %i[create index show] do
+        resources :messages, only: [:create]
+      end
     end
   end
 end

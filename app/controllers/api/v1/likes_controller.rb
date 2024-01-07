@@ -6,7 +6,7 @@ module Api
       before_action :set_post
 
       def create
-        current_user = User.find(params[:id]);
+        current_user = User.find(params[:id])
 
         existing_like = current_user.likes.find_by(post_id: @post.id)
 
@@ -18,10 +18,9 @@ module Api
       end
 
       def destroy
-        current_user = User.find(params[:id]);
+        current_user = User.find(params[:id])
         @like = current_user.likes.find_by(post_id: @post.id)
         @like.destroy
-
       end
 
       private
@@ -29,8 +28,6 @@ module Api
       def set_post
         @post = Post.find(params[:post_id])
       end
-
-     
     end
   end
 end

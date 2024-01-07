@@ -3,7 +3,7 @@
 module Api
   module V1
     class CommentsController < ApplicationController
-      #TODO https://github.com/okuyama-code/hc_twitter_clone/blob/notification/app/controllers/comments_controller.rb
+      # TODO: https://github.com/okuyama-code/hc_twitter_clone/blob/notification/app/controllers/comments_controller.rb
 
       def create
         @comment = Comment.new(comment_params)

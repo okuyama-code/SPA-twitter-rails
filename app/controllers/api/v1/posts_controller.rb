@@ -30,8 +30,8 @@ module Api
       end
 
       def create
-        pp "デバック！！！！！！！！！！！！！"
-        pp current_user
+        Rails.logger.debug 'デバック！！！！！！！！！！！！！'
+        Rails.logger.debug current_user
 
         post = current_user.posts.build(post_params)
         if post.save!

@@ -24,10 +24,12 @@ class User < ApplicationRecord
   has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: :follower_id
   has_many :followers, through: :reverse_of_relationships, source: :following
 
-
-  #TODO 通知機能
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+
+  # TODO: DM機能
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
 
   def create_notification_follow!(current_user, user_id)
     temp = Notification.where(['visitor_id = ? and visited_id = ? and action = ? ', current_user.id, user_id, 'follow'])
@@ -39,8 +41,6 @@ class User < ApplicationRecord
     )
     notification.save if notification.valid?
   end
-
-
 
   before_create :attach_default_image
 

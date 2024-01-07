@@ -8,7 +8,7 @@ class Post < ApplicationRecord
   has_many :reposts, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  # TODO 通知機能
+  # TODO: 通知機能
   has_many :notifications, dependent: :destroy
 
   def create_notification_like!(current_user)
@@ -49,5 +49,4 @@ class Post < ApplicationRecord
     notification.checked = true if notification.visitor_id == notification.visited_id
     notification.save if notification.valid?
   end
-
 end
