@@ -1,18 +1,23 @@
 # frozen_string_literal: true
 
-module API
+module Api
   module V1
     class GroupsController < ApplicationController
+      # http://localhost:3000/api/v1/groups
       def index
         # ログインユーザー所属ルームID取得
-        current_entries = current_user.entries
-        my_room_id = []
+        # current_entries = current_user.entries
+        current_entries = User.find(1).entries
+        my_group_id = []
         current_entries.each do |entry|
           # エントリーから取得したルームIDを my_room_id 配列に追加しています。
-          my_room_id << entry.room.id
+          my_group_id << entry.group.id
         end
         # 自分のroom_idと同じでuser_idが自分ではないentryを取得
-        @another_entries = Entry.where(room_id: my_room_id).where.not(user_id: current_user.id)
+        # another_entries = Entry.where(group_id: my_group_id).where.not(user_id: current_user.id)
+        another_entries = Entry.where(group_id: my_group_id).where.not(user_id: 1)
+
+        render json: {current_entries: current_entries, another_entries: another_entries}
       end
 
       def show
@@ -30,11 +35,13 @@ module API
       # TODO RoomをGroupに変換
       # params[:user_id]でshowのidを渡す
       def create
+        pp "デバック！！！！！！！！！！！！！"
+        pp current_user
+        pp params[:user_id]
         ActiveRecord::Base.transaction do
-          room = Room.create(user_id: current_user.id)
-          Entry.create!(user_id: current_user.id, room_id: room.id)
-          Entry.create!(user_id: params[:user_id], room_id: room.id)
-          redirect_to room_path(room), notice: 'roomのcreateアクションが実行されました。'
+          group = Group.create(user_id: current_user.id)
+          Entry.create!(user_id: current_user.id, group_id: group.id)
+          Entry.create!(user_id: params[:user_id], group_id: group.id)
         end
       end
     end
