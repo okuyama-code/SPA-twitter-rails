@@ -1,5 +1,3 @@
-https://github.com/okuyama-code/SPA-twitter-rails/pull/2
-
 ## 現在のブランチ
 dm
 

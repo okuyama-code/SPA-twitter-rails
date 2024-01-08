@@ -16,6 +16,10 @@ module Api
 
       # http://localhost:3000/api/v1/users/1
       def show
+        pp "デバック！！！！！！！！！！！！！"
+        pp current_user
+        pp current_user.id
+
         user_posts = @user.posts.order(created_at: :desc)
         user_posts_with_image = user_posts.map { |post| augment_with_image(post) }
         user_comments = @user.comments.order(created_at: :desc)
