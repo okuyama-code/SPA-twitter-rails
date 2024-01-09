@@ -7,6 +7,7 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy # Post.commentsで、投稿が所有するコメントを取得できる。
   has_many :reposts, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   # TODO: 通知機能
   has_many :notifications, dependent: :destroy

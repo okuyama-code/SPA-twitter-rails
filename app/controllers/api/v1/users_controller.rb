@@ -28,7 +28,12 @@ module Api
                        posts: user_posts_with_image, user_comments: }
       end
 
-      def destroy; end
+      # http://localhost:3000/api/v1/current_user/destroy
+      def destroy
+        pp "デバック！！！！！！！！！！！！！"
+        pp current_user
+        current_user.destroy
+      end
 
       private
 
