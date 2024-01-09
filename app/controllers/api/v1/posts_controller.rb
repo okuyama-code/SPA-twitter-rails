@@ -30,8 +30,6 @@ module Api
       end
 
       def create
-        Rails.logger.debug 'デバック！！！！！！！！！！！！！'
-        Rails.logger.debug current_user
 
         post = current_user.posts.build(post_params)
         if post.save!
@@ -50,10 +48,14 @@ module Api
         )
         post = Post.find(params[:id])
         post.image.attach(blob)
+
+        render json: {post: post}
       end
 
       def destroy
         @post.destroy
+
+        render json: {post: @post}
       end
 
       # http://localhost:3000/api/v1/posts/87/comments

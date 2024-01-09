@@ -10,8 +10,6 @@ class Api::V1::BookmarksController < ApplicationController
 
     existing_bookmark = current_user.bookmarks.create(post_id: @post.id)
 
-
-
     render json: {bookmark: @bookmark}
   end
 

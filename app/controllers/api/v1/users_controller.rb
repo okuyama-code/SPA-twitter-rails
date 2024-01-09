@@ -29,10 +29,12 @@ module Api
       end
 
       # http://localhost:3000/api/v1/current_user/destroy
-      def destroy
+      def current_user_destroy
+        @user = User.find(params[:id])
+
         pp "デバック！！！！！！！！！！！！！"
-        pp current_user
-        current_user.destroy
+        pp @user
+        @user.destroy
       end
 
       private

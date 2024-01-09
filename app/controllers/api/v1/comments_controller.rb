@@ -3,7 +3,6 @@
 module Api
   module V1
     class CommentsController < ApplicationController
-      # TODO: https://github.com/okuyama-code/hc_twitter_clone/blob/notification/app/controllers/comments_controller.rb
 
       def create
         @comment = Comment.new(comment_params)
@@ -20,6 +19,9 @@ module Api
       def destroy
         @comment = Comment.find(params[:id])
         @comment.destroy
+
+        render json: {comment: @comment}
+
       end
 
       private

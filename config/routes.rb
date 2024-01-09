@@ -21,7 +21,7 @@ Rails.application.routes.draw do
         post 'follow', to: 'relationships#create'
         post 'unfollow', to: 'relationships#destroy'
       end
-      post 'current_user/destroy', to: 'users#destroy'
+      post 'current_user/destroy', to: 'users#current_user_destroy'
       resources :profile, only: %i[update]
       resources :comments, only: %i[create destroy]
       resources :notifications, only: %i[index]

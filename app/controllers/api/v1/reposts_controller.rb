@@ -11,6 +11,8 @@ module Api
         return if existing_repost
 
         @repost = Repost.create(user_id: params[:id], post_id: @post.id)
+
+        render json: { repost: @repost}
       end
 
       def destroy
@@ -20,6 +22,7 @@ module Api
         return unless @repost
 
         @repost.destroy
+        render json: { repost: @repost}
       end
 
       private
