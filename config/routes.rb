@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       resources :comments, only: %i[create destroy]
       resources :notifications, only: %i[index]
       resources :groups, only: %i[create index show] do
-        resources :messages, only: [:create]
+        resources :messages, only: %i[index create]
       end
     end
   end

@@ -23,12 +23,10 @@ module Api
         pp current_user
 
         @group = Group.find(params[:id])
-        @messages = @group.messages.all
-        @message = Message.new
         @entries = @group.entries
         @another_entry = @entries.where.not(user_id: current_user.id).first
 
-        render json: {messages: @messages, another_entry: @another_entry }
+        render json: {another_entry: @another_entry }
       end
 
       def create

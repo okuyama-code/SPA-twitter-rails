@@ -5,16 +5,23 @@ module Api
     class MessagesController < ApplicationController
       # before_action :authenticate_user!
 
+      # http://localhost:3000/api/v1/groups/:group_id/messages
+      def index
+        group = Group.find(params[:group_id])
+        # group = Group.find(1)
+        messages = group.messages
+
+        render json: {messages: messages}
+      end
+
       def create
-        room = Room.find(params[:room_id])
-        message = room.messages.build(message_params)
+        group = Group.find(params[:group_id])
+        message = group.messages.build(message_params)
         message.user_id = current_user.id
         if message.save!
-          flash[:notice] = 'メッセージを投稿しました。'
-          redirect_to request.referer
+          render json: {message: message}
         else
-          flash[:notice] = 'メッセージの投稿に失敗しました'
-          redirect_back(fallback_location: root_path)
+          render json: { error: "saveできませんでした"}
         end
       end
 
