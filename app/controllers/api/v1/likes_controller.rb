@@ -11,6 +11,7 @@ module Api
         return if existing_like
 
         @like = Like.create(user_id: params[:id], post_id: @post.id)
+        render json: { like: @like }
       end
 
       def destroy
@@ -20,6 +21,7 @@ module Api
         return unless @like
 
         @like.destroy
+        render json: { like: @like }
       end
 
       private

@@ -47,10 +47,12 @@ module Api
         )
         post = Post.find(params[:id])
         post.image.attach(blob)
+        render json: { post: }
       end
 
       def destroy
         @post.destroy
+        render json: { post: @post }
       end
 
       # http://localhost:3000/api/v1/posts/87/comments
