@@ -1,3 +1,9 @@
+## PR
+https://github.com/okuyama-code/spa-twitter-react/pull/4
+
+https://github.com/okuyama-code/SPA-twitter-rails/pull/4
+
+
 ## 現在のブランチ
 dm
 
