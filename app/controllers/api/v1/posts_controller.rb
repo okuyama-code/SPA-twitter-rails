@@ -30,7 +30,6 @@ module Api
       end
 
       def create
-
         post = current_user.posts.build(post_params)
         if post.save!
           render json: { post: }, status: :ok
@@ -49,13 +48,13 @@ module Api
         post = Post.find(params[:id])
         post.image.attach(blob)
 
-        render json: {post: post}
+        render json: { post: }
       end
 
       def destroy
         @post.destroy
 
-        render json: {post: @post}
+        render json: { post: @post }
       end
 
       # http://localhost:3000/api/v1/posts/87/comments

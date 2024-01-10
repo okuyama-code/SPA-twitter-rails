@@ -14,19 +14,18 @@ module Api
         # 自分のroom_idと同じでuser_idが自分ではないentryを取得
         another_entries = Entry.where(group_id: my_group_id).where.not(user_id: current_user.id)
 
-
-        render json: {current_entries: current_entries, another_entries: another_entries}
+        render json: { current_entries:, another_entries: }
       end
 
       def show
-        pp "デバック！！！！！！！！！！！！！"
-        pp current_user
+        Rails.logger.debug 'デバック！！！！！！！！！！！！！'
+        Rails.logger.debug current_user
 
         @group = Group.find(params[:id])
         @entries = @group.entries
         @another_entry = @entries.where.not(user_id: current_user.id).first
 
-        render json: {another_entry: @another_entry }
+        render json: { another_entry: @another_entry }
       end
 
       def create

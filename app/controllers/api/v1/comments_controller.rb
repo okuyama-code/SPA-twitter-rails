@@ -3,7 +3,6 @@
 module Api
   module V1
     class CommentsController < ApplicationController
-
       def create
         @comment = Comment.new(comment_params)
         @comment.user_id = current_user.id
@@ -20,8 +19,7 @@ module Api
         @comment = Comment.find(params[:id])
         @comment.destroy
 
-        render json: {comment: @comment}
-
+        render json: { comment: @comment }
       end
 
       private

@@ -19,7 +19,6 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
 
-
   has_many :relationships, foreign_key: :following_id, dependent: :destroy
   has_many :followings, through: :relationships, source: :follower, dependent: :destroy
 

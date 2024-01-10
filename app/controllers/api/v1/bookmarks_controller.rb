@@ -1,30 +1,36 @@
-class Api::V1::BookmarksController < ApplicationController
-  before_action :set_post
+# frozen_string_literal: true
 
-  def index
-    bookmarks = Bookmark.all
-  end
+module Api
+  module V1
+    class BookmarksController < ApplicationController
+      before_action :set_post
 
-  def create
-    current_user = User.find(params[:id])
+      def index
+        Bookmark.all
+      end
 
-    existing_bookmark = current_user.bookmarks.create(post_id: @post.id)
+      def create
+        current_user = User.find(params[:id])
 
-    render json: {bookmark: @bookmark}
-  end
+        current_user.bookmarks.create(post_id: @post.id)
 
-  def destroy
-    current_user = User.find(params[:id])
+        render json: { bookmark: @bookmark }
+      end
 
-    @bookmark = current_user.bookmarks.find_by(post_id: @post.id)
-    @bookmark.destroy
+      def destroy
+        current_user = User.find(params[:id])
 
-    render json: {bookmark: @bookmark}
-  end
+        @bookmark = current_user.bookmarks.find_by(post_id: @post.id)
+        @bookmark.destroy
 
-  private
+        render json: { bookmark: @bookmark }
+      end
 
-  def set_post
-    @post = Post.find(params[:post_id])
+      private
+
+      def set_post
+        @post = Post.find(params[:post_id])
+      end
+    end
   end
 end

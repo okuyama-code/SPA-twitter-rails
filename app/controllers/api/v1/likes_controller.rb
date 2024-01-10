@@ -16,7 +16,7 @@ module Api
 
         @post.create_notification_like!(current_user)
 
-        render json: {like: @like}
+        render json: { like: @like }
       end
 
       def destroy
@@ -24,7 +24,7 @@ module Api
         @like = current_user.likes.find_by(post_id: @post.id)
         @like.destroy
 
-        render json: {like: @like}
+        render json: { like: @like }
       end
 
       private

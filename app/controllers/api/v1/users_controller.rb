@@ -32,8 +32,8 @@ module Api
       def current_user_destroy
         @user = User.find(params[:id])
 
-        pp "デバック！！！！！！！！！！！！！"
-        pp @user
+        Rails.logger.debug 'デバック！！！！！！！！！！！！！'
+        Rails.logger.debug @user
         @user.destroy
       end
 

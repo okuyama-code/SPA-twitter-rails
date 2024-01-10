@@ -11,7 +11,7 @@ module Api
         # group = Group.find(1)
         messages = group.messages
 
-        render json: {messages: messages}
+        render json: { messages: }
       end
 
       def create
@@ -19,9 +19,9 @@ module Api
         message = group.messages.build(message_params)
         message.user_id = current_user.id
         if message.save!
-          render json: {message: message}
+          render json: { message: }
         else
-          render json: { error: "saveできませんでした"}
+          render json: { error: 'saveできませんでした' }
         end
       end
 
