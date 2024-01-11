@@ -38,16 +38,16 @@ module Api
         end
       end
 
-      def attach_images
-        return unless params[:image][:name] != ''
-
-        blob = ActiveStorage::Blob.create_and_upload!(
-          io: StringIO.new("#{decode(params[:image][:data])}\n"),
-          filename: params[:image][:name]
-        )
-        post = Post.find(params[:id])
-        post.image.attach(blob)
-      end
+  def attach_images
+    if params[:image][:name] != ""
+      blob =  ActiveStorage::Blob.create_and_upload!(
+        io: StringIO.new(decode(params[:image][:data]) + "\n"),
+        filename: params[:image][:name]
+      )
+      post = Post.find(params[:id])
+      post.image.attach(blob)
+    end
+  end
 
       private
 
