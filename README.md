@@ -1,7 +1,7 @@
 ## PR
 https://github.com/okuyama-code/spa-twitter-react/pull/4
 
-https://github.com/okuyama-code/SPA-twitter-rails/pull/4
+https://github.com/okuyama-code/SPA-twitter-rails/pull/5
 
 
 ## 現在のブランチ
