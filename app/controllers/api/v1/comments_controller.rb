@@ -8,6 +8,7 @@ module Api
         @comment.user_id = current_user.id
 
         if @comment.save
+          @comment.post.create_notification_comment!(current_user, @comment.id)
           render json: { comment: @comment }
         else
           render json: { message: 'コメントの作成に失敗しました。' }

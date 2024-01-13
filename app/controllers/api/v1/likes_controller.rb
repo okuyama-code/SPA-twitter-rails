@@ -6,21 +6,24 @@ module Api
       before_action :set_post
 
       def create
-        existing_like = Like.find_by(user_id: params[:id], post_id: @post.id)
+        current_user = User.find(params[:id])
+
+        existing_like = current_user.likes.find_by(post_id: @post.id)
 
         return if existing_like
 
-        @like = Like.create(user_id: params[:id], post_id: @post.id)
+        @like = current_user.likes.create(post_id: @post.id)
+
+        @post.create_notification_like!(current_user)
+
         render json: { like: @like }
       end
 
       def destroy
-        @post = Post.find(params[:post_id])
-        @like = Like.find_by(user_id: params[:id], post_id: @post.id)
-
-        return unless @like
-
+        current_user = User.find(params[:id])
+        @like = current_user.likes.find_by(post_id: @post.id)
         @like.destroy
+
         render json: { like: @like }
       end
 

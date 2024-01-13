@@ -38,16 +38,33 @@ module Api
         end
       end
 
-  def attach_images
-    if params[:image][:name] != ""
-      blob =  ActiveStorage::Blob.create_and_upload!(
-        io: StringIO.new(decode(params[:image][:data]) + "\n"),
-        filename: params[:image][:name]
-      )
-      post = Post.find(params[:id])
-      post.image.attach(blob)
-    end
-  end
+      def attach_images
+        return unless params[:image][:name] != ''
+
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: StringIO.new("#{decode(params[:image][:data])}\n"),
+          filename: params[:image][:name]
+        )
+        post = Post.find(params[:id])
+        post.image.attach(blob)
+
+        render json: { post: }
+      end
+
+      def destroy
+        @post.destroy
+
+        render json: { post: @post }
+      end
+
+      # http://localhost:3000/api/v1/posts/87/comments
+      def post_comment
+        @post = Post.find(params[:post_id])
+        post_comments = @post.comments.order(created_at: :desc)
+
+        render json: { post_comments: }
+      end
+
 
       private
 
