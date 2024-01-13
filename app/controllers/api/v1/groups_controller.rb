@@ -9,7 +9,10 @@ module Api
         my_group_id = []
         current_entries.each do |entry|
           # エントリーから取得したルームIDを my_room_id 配列に追加しています。
-          my_group_id << entry.group.id
+          # my_group_id << entry.group.id
+          
+          # pluckメソッドを使用してエントリーから取得したグループIDをmy_group_id配列に追加
+          my_group_id.concat(current_entries.pluck(:group_id))
         end
         # 自分のroom_idと同じでuser_idが自分ではないentryを取得
         another_entries = Entry.where(group_id: my_group_id).where.not(user_id: current_user.id)
@@ -18,9 +21,6 @@ module Api
       end
 
       def show
-        Rails.logger.debug 'デバック！！！！！！！！！！！！！'
-        Rails.logger.debug current_user
-
         @group = Group.find(params[:id])
         @entries = @group.entries
         @another_entry = @entries.where.not(user_id: current_user.id).first
