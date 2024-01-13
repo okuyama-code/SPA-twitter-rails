@@ -18,7 +18,6 @@ module Api
       def destroy
         @comment = Comment.find(params[:id])
         @comment.destroy
-
         render json: { comment: @comment }
       end
 

@@ -65,6 +65,7 @@ module Api
         render json: { post_comments: }
       end
 
+
       private
 
       def post_params
