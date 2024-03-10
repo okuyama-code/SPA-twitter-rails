@@ -1,7 +1,6 @@
 ## setup
 docker compose build
 docker compose run --rm api bin/setup
-docker compose run --rm api yarn install
 
 ## run
 docker compose up
