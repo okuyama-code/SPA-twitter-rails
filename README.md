@@ -1,11 +1,11 @@
 ## setup
 docker compose build
-docker compose run --rm web bin/setup
-docker compose run --rm web yarn install
+docker compose run --rm api bin/setup
+docker compose run --rm api yarn install
 
 ## run
 docker compose up
-docker compose exec web bash
+docker compose exec api bash
 rails db:create
 rails db:migrate
 rails db:seed
